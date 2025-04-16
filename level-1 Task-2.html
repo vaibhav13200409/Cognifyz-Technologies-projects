@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Color Change and Basic Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #colorButton, #alertButton, #calculateButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      color: white;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    #colorButton {
+      background-color: #4CAF50;
+    }
+    #alertButton {
+      background-color: #008CBA;
+    }
+    #calculateButton {
+      background-color: #f39c12;
+    }
+    .calculator {
+      margin-top: 20px;
+    }
+    .calculator input {
+      padding: 10px;
+      margin: 5px;
+      width: calc(100% - 22px);
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .result {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <button id="colorButton">Change the Color</button>
+  <button id="alertButton">Show Greeting please</button>
+
+  <div class="calculator">
+    <h3>Basic Calculator</h3>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+    <button id="calculateButton">Calculate</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const colorButton = document.getElementById('colorButton');
+    const alertButton = document.getElementById('alertButton');
+    const calculateButton = document.getElementById('calculateButton');
+    const resultDiv = document.getElementById('result');
+    colorButton.addEventListener('click', () => {
+      const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+      colorButton.style.backgroundColor = randomColor;
+    });
+    alertButton.addEventListener('click', () => {
+      const now = new Date();
+      const hours = now.getHours();
+      let greeting;
+
+      if (hours < 12) {
+        greeting = "Good Morning!";
+      } else if (hours < 18) {
+        greeting = "Good Afternoon!";
+      } else {
+        greeting = "Good Evening!";
+      }
+
+      alert(greeting);
+    });
+    calculateButton.addEventListener('click', () => {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = "Please enter valid numbers!";
+        resultDiv.style.color = "red";
+      } else {
+        const sum = num1 + num2;
+        resultDiv.textContent = `Result: ${sum}`;
+        resultDiv.style.color = "green";
+      }
+    });
+  </script>
+</body>
+</html>
